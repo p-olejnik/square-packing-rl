@@ -82,9 +82,16 @@ class Map:
 
         return True
 
-    def place_square(self, x: np.float64, y: np.float64, rotation: np.float64) -> bool:
-        assert rotation <= np.pi / 2
-        new_square = Square(Position(x, y), rotation)
+    def step(self, action: tuple[np.float64]) -> tuple:
+      x, y, angle = action
+      done = self.place_square(x, y, angle)
+      reward = -1 + 2 * done
+      state = self.state()
+      return state, reward, done
+
+    def place_square(self, x: np.float64, y: np.float64, angle: np.float64) -> bool:
+        assert angle <= np.pi / 2
+        new_square = Square(Position(x, y), angle)
 
         if not self._can_place_square(new_square):
             return False
@@ -112,7 +119,7 @@ class Map:
 
         return BoundingSquare(min_x, max_x, min_y, max_y)
 
-    def representation(self) -> NDArray[np.float64]:
+    def state(self) -> NDArray[np.float64]:
         """Return triples representing a square for each square on the map"""
         return np.array([square.representation() for square in self.squares])
 
@@ -139,3 +146,6 @@ class Map:
         plt.ylim(bounding_square.min_y - 1, bounding_square.max_y + 1)
         plt.grid(True)
         plt.show()
+
+    def reset(self) -> None:
+      self.squares.clear()

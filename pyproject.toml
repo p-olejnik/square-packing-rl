@@ -11,6 +11,7 @@ python = ">=3.11, <3.12"
 tensorflow = {version = "^2.12.0", platform = "linux"}
 tensorflow-macos = {version = "^2.12.0", platform = "darwin"}
 shapely = "^2.0.1"
+tqdm = "^4.65.0"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.0.0"
