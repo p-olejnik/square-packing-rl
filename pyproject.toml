@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "square-packing-rl"
+version = "0.1.0"
+description = ""
+authors = ["p-olejnik <pw.olejnik@student.uw.edu.pl>"]
+readme = "README.md"
+packages = [{include = "square_packing_rl"}]
+
+[tool.poetry.dependencies]
+python = ">=3.11, <3.12"
+tensorflow = {version = "^2.12.0", platform = "linux"}
+tensorflow-macos = {version = "^2.12.0", platform = "darwin"}
+shapely = "^2.0.1"
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^6.0.0"
+pre-commit = "^3.3.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
